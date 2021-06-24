@@ -1,5 +1,5 @@
 csv2djipilot creates a DJI kml file to be imported in a DJI Pilot waypoints.
-Csvfile conatains
+Csvfile contains
 ```
 point_name;lon;lat;height;heading;gimbal
 waypoint_A;2.2595689652949886;48.02450015337408;15.0;180;-30
