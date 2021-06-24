@@ -6,14 +6,15 @@ import sys
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('csvfile', type=argparse.FileType('r'),help="Specify csv input file") 
+parser.add_argument('csvfile', type=argparse.FileType('r'),
+                    help="Specify csv input file")
 #parser.add_argument('-outputfile',type=string, required=False, default="pilot.kml")
-parser.add_argument('-o', '--output', type=argparse.FileType('w'),\
-     default=sys.stdout, help="Specify output file (default:stdout)") 
+parser.add_argument('-o', '--output', type=argparse.FileType('w'),
+                    default=sys.stdout, help="Specify output file (default:stdout)")
 
 args = parser.parse_args()
 
-CsvFile=args.csvfile.name
+CsvFile = args.csvfile.name
 
 print(f'{CsvFile} to {args.output.name}')
 #CsvFile = 'exemple.csv'
@@ -47,13 +48,13 @@ XML_string = """<?xml version="1.0" encoding="UTF-8"?>
       <name>Waypoints</name>
       <description>Waypoints in the Mission.</description>"""
 name = None
-lat = None
 lon = None
+lat = None
 height = None
 heading = None
 gimbal = None
-all_coordinates=""
-waypoint_number=1
+all_coordinates = ""
+waypoint_number = 1
 
 waypoint = Template("""      <Placemark>
         <name>Waypoint$waypoint_number</name>
@@ -76,11 +77,11 @@ waypoint = Template("""      <Placemark>
         </ExtendedData>
         <Point>
           <altitudeMode>relativeToGround</altitudeMode>
-          <coordinates>$lat,$lon,$height</coordinates>
+          <coordinates>$lon,$lat,$height</coordinates>
         </Point>
       </Placemark>""")
 
-all_coordinates_template = Template("$lat,$lon,$height")
+all_coordinates_template = Template("$lon,$lat,$height")
 xml_end = Template("""    </Folder>
     <Placemark>
       <name>Wayline</name>
@@ -129,18 +130,20 @@ with open(CsvFile, newline='') as csvfile:
     for row in csv_lines:
         if row:
             name = row[0]
-            lat = row[1]
-            lon = row[2]
+            lon = row[1]
+            lat = row[2]
             height = row[3]
             heading = row[4]
             gimbal = row[5]
 
-            XML_string += waypoint.substitute(lat=lat, lon=lon, height=height,waypoint_number=waypoint_number, heading=heading, gimbal=gimbal)+"\n"
-            all_coordinates+=all_coordinates_template.substitute(lat=lat, lon=lon, height=height)+" "
-        waypoint_number+=1
-#remove last space from coordinates string
-all_coordinates=all_coordinates[:-1]
-XML_string +=xml_end.substitute(all_coordinates=all_coordinates)
+            XML_string += waypoint.substitute(lon=lon, lat=lat, height=height,
+                                              waypoint_number=waypoint_number, heading=heading, gimbal=gimbal)+"\n"
+            all_coordinates += all_coordinates_template.substitute(
+                lon=lon, lat=lat, height=height)+" "
+        waypoint_number += 1
+# remove last space from coordinates string
+all_coordinates = all_coordinates[:-1]
+XML_string += xml_end.substitute(all_coordinates=all_coordinates)
 
 
 with args.output as outpufile:
