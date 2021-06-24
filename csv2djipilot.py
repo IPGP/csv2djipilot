@@ -2,17 +2,20 @@
 
 from string import Template
 import csv
+import sys
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('csvfile', type=argparse.FileType('r'))
-parser.add_argument('-outputfile',required=False, default="pilot.kml")
+parser.add_argument('csvfile', type=argparse.FileType('r'),help="Specify csv input file") 
+#parser.add_argument('-outputfile',type=string, required=False, default="pilot.kml")
+parser.add_argument('-o', '--output', type=argparse.FileType('w'),\
+     default=sys.stdout, help="Specify output file (default:stdout)") 
 
 args = parser.parse_args()
 
 CsvFile=args.csvfile.name
 
-print(f'{CsvFile} to {args.outputfile}')
+print(f'{CsvFile} to {args.output.name}')
 #CsvFile = 'exemple.csv'
 #CsvFile = 'exemple_simple.csv'
 csv_header = False
@@ -140,5 +143,5 @@ all_coordinates=all_coordinates[:-1]
 XML_string +=xml_end.substitute(all_coordinates=all_coordinates)
 
 
-with open(args.outputfile, 'w') as outpufile:
+with args.output as outpufile:
     outpufile.write(XML_string)
