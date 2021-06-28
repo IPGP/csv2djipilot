@@ -72,8 +72,9 @@ waypoint = Template("""      <Placemark>
           <mis:useWaylinePointType>true</mis:useWaylinePointType>
           <mis:pointType>LineStop</mis:pointType>
           <mis:cornerRadius>0.2</mis:cornerRadius>
-          <mis:actions param="2000" accuracy="0" cameraIndex="0" payloadType="0" payloadIndex="0">Hovering</mis:actions>
+          <mis:actions param="1000" accuracy="0" cameraIndex="0" payloadType="0" payloadIndex="0">Hovering</mis:actions>
           <mis:actions param="0" accuracy="0" cameraIndex="0" payloadType="0" payloadIndex="0">ShootPhoto</mis:actions>
+          <mis:actions param="1000" accuracy="0" cameraIndex="0" payloadType="0" payloadIndex="0">Hovering</mis:actions>
         </ExtendedData>
         <Point>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -132,6 +133,10 @@ with open(CsvFile, newline='') as csvfile:
             name = row[0]
             lon = row[1]
             lat = row[2]
+            if lon[0] == '_':
+              lon=lon[1:]
+            if lat[0] == '_':
+              lon=lat[1:]
             height = row[3]
             heading = row[4]
             gimbal = row[5]
