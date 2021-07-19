@@ -11,7 +11,7 @@ usage: csv2djipilot.py [-h] [-o OUTPUT] csvfile
 
 ex: 
 ````
-pythpn3 csv2djipilot.py csvfile.csv -o output.kml
+python3 csv2djipilot.py csvfile.csv -o output.kml
 ````
 
 tested with DJI Matrice 210 RTK V2
