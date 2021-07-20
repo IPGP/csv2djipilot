@@ -18,4 +18,4 @@ tested with DJI Matrice 210 RTK V2
 
 To do :
 - [ ] User interface to change actions for the waypoints or colums for actions in the csv
-- [ ] specific speed for each waypoint in the csv. It is the speed between current point to next one (or the speed to reach current point ? )
+- [ ] Speed for each waypoint in the csv. It is the speed between this waypoint and the next waypoint with range [0, 15] m/s.
