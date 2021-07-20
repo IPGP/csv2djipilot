@@ -15,3 +15,6 @@ python3 csv2djipilot.py csvfile.csv -o output.kml
 ````
 
 tested with DJI Matrice 210 RTK V2
+
+To do :
+- [ ] User interface to change actions for the waypoints
