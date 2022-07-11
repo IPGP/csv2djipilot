@@ -17,7 +17,7 @@ actions sequence is a list of actions separted by points without space. There co
 - G40 =>Gimbal a -40°
 - REC => start video recording
 - STOPREC => stop video recording
-- A-170 => turn aircraft to -170 . Orientation in related to geographic north. 0 is North, 90 is Est,...
+- A-170 => turn aircraft to -170 .  heading has a range of [-180, 180] degrees, where 0 represents True North.
 
 usage: csv2djipilot.py [-h] [-o OUTPUT] [--onfinish {hover,gohome}] csvfile
 
